@@ -18,14 +18,14 @@ def get_tables_count(students_in_a_class: list) -> list:
 
 
 # Generate test data
-students_in_a_class = [
+students = [
     random.randint(10, 50),
     random.randint(10, 50),
     random.randint(10, 50),
 ]
 
-class_1, class_2, class_3 = get_tables_count(students_in_a_class)
+class_1, class_2, class_3 = get_tables_count(students)
 
-print(f"Class #1 students = {students_in_a_class[0]}, tables = {class_1}")
-print(f"Class #2 students = {students_in_a_class[1]}, tables = {class_2}")
-print(f"Class #3 students = {students_in_a_class[2]}, tables = {class_3}")
+print(f"Class #1 students = {students[0]}, tables = {class_1}")
+print(f"Class #2 students = {students[1]}, tables = {class_2}")
+print(f"Class #3 students = {students[2]}, tables = {class_3}")

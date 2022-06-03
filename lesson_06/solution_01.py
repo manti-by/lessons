@@ -55,7 +55,7 @@ def get_longest_word(text_stats: dict) -> str:
     return longest
 
 
-text = """
+example_text = """
     Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind 
     texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A 
     small river named Duden flows by their place and supplies it with the necessary regelialia. It is a 
@@ -63,6 +63,6 @@ text = """
     has no control about the blind texts it is an almost unorthographic life.
 """
 
-text_stats = get_text_stats(text)
-print("Longest word: ", get_longest_word(text_stats))
-print("Most frequent word: ", get_most_frequent_word(text_stats))
+example_stats = get_text_stats(example_text)
+print("Longest word: ", get_longest_word(example_stats))
+print("Most frequent word: ", get_most_frequent_word(example_stats))
