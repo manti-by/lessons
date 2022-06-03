@@ -9,7 +9,7 @@ MIN_WORD_LENGTH = 4
 
 def get_text_stats(text: str) -> dict:
     # Remove punctuation marks and split by word
-    text = text.replace(".", "").replace(",", "").split()
+    text = text.replace(".", " ").replace(",", " ").split()
 
     # Calculate word stats in the text
     result = {}
