@@ -19,23 +19,23 @@ import math
 
 def solution_forloop(area: int) -> list:
     result = []
-    while area > 0:
+    while area:
         biggest_panel = int(math.sqrt(area)) ** 2
         result.append(biggest_panel)
         area -= biggest_panel
     return result
 
 
-def solution_recursive(area: int, current_result: list = None) -> list:
-    current_result = current_result or []
+def solution_recursive(area: int, result: list = None) -> list:
+    result = result or []
 
     if not area:
-        return current_result
+        return result
 
     biggest_panel = int(math.sqrt(area)) ** 2
-    current_result.append(biggest_panel)
+    result.append(biggest_panel)
 
-    return solution_recursive(area - biggest_panel, current_result)
+    return solution_recursive(area - biggest_panel, result)
 
 
 def main():
