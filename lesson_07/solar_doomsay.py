@@ -14,34 +14,32 @@ return [9, 1, 1, 1].
 """
 
 
-from math import sqrt
+import math
 
 
 def solution_forloop(area: int) -> list:
     result = []
     while area > 0:
-        biggest_part = int(area ** 0.5) ** 2
-        result.append(biggest_part)
-        area -= biggest_part
+        biggest_panel = int(math.sqrt(area)) ** 2
+        result.append(biggest_panel)
+        area -= biggest_panel
     return result
 
 
-def solution_recursive(area: int, current_result: int = None) -> list:
-    if current_result is None:
-        current_result = []
+def solution_recursive(area: int, current_result: list = None) -> list:
+    current_result = current_result or []
 
-    side = int(sqrt(area))
-    current_result.append(side ** 2)
-
-    remainder = area - side ** 2
-    if not remainder:
+    if not area:
         return current_result
 
-    return solution_recursive(remainder, current_result)
+    biggest_panel = int(math.sqrt(area)) ** 2
+    current_result.append(biggest_panel)
+
+    return solution_recursive(area - biggest_panel, current_result)
 
 
 def main():
-    for x in (12, 127, 982, 1146, 11273):
+    for x in (12, 127, 332, 982, 4372, 11467):
         print(f"Panels for {x} (forloop):", solution_forloop(x))
         print(f"Panels for {x} (recursive):", solution_recursive(x))
         print("")
