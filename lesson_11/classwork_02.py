@@ -36,15 +36,19 @@ def select_user_by_age(from_age: int, to_age: int) -> list:
         return cursor.fetchall()
 
 
-if __name__ == "__main__":
+def main():
     while True:
-        choice = input("Выполнить поиск по возрасту [В] или имени [И]:")
-        if choice == "В":
+        choice = input("Выполнить поиск по возрасту [1] или имени [2]:")
+        if choice == "1":
             start = input("Введите минимальный возраст:")
             stop = input("Введите максимальный возраст:")
             print(select_user_by_age(int(start), int(stop)))
-        elif choice == "И":
+        elif choice == "2":
             search = input("Введите имя:")
             print(select_user_by_name(search))
         else:
-            exit()
+            return print("Пока!")
+
+
+if __name__ == "__main__":
+    main()
