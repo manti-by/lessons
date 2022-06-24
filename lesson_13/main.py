@@ -1,4 +1,5 @@
 from faker import Faker
+from sqlalchemy.sql import or_
 from sqlalchemy.orm import sessionmaker
 
 from models import Base, User, Profile, Address, Product, Purchase
@@ -40,5 +41,18 @@ if __name__ == "__main__":
     CurrentSession = sessionmaker(bind=engine)
     current_session = CurrentSession()
 
-    for _ in range(10):
-        generate_purchase(current_session)
+    users = current_session.query(User).join(Purchase).join(Product).filter(
+        Product.price > 50
+    ).all()
+
+    for user in users:
+        print(user.id, user.email)
+
+    product = current_session.query(Product)[5]
+    users = current_session.query(User).join(Purchase).join(Product).filter(
+        or_(Product.name == product.name, Purchase.count >= 3)
+    ).all()
+
+    for user in users:
+        print(user.id, user.email)
+
