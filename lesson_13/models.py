@@ -20,7 +20,7 @@ class Address(Base):
     __tablename__ = "address"
     id = Column(Integer, primary_key=True)
     city = Column(String)
-    address = Column(Integer)
+    address = Column(String)
 
     user_id = Column(Integer, ForeignKey("user.id"))
     user = relationship("User", back_populates="addresses")
