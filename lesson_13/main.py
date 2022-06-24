@@ -1,13 +1,13 @@
 from faker import Faker
 from sqlalchemy.orm import sessionmaker
 
-from models import Base, User, Profile, Address
+from models import Base, User, Profile, Address, Product, Purchase
 from utils import setup_db_engine, create_database_if_not_exists
 
 fake = Faker()
 
 
-def generate_user(session):
+def generate_user(session) -> User:
     user = User(
         email=fake.email(), password=fake.word()
     )
@@ -18,6 +18,17 @@ def generate_user(session):
         user=user, city=fake.city(), address=fake.address()
     )
     session.add_all([user, profile, address])
+    session.commit()
+    return user
+
+
+def generate_purchase(session):
+    user = generate_user(session)
+    product = Product(name=fake.company(), price=fake.pyfloat(min_value=20, max_value=100))
+    purchase = Purchase(
+        user=user, product=product, count=fake.pyint(min_value=1, max_value=5)
+    )
+    session.add_all([product, purchase])
     session.commit()
 
 
@@ -30,4 +41,4 @@ if __name__ == "__main__":
     current_session = CurrentSession()
 
     for _ in range(10):
-        generate_user(current_session)
+        generate_purchase(current_session)
