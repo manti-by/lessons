@@ -1,11 +1,10 @@
-from pathlib import Path
 from sqlalchemy import create_engine
 from sqlalchemy.engine import Engine
 from sqlalchemy_utils import create_database, database_exists
 
 DB_USER = "manti"
 DB_PASSWORD = "manti"
-DB_NAME = "lessons"
+DB_NAME = "manti"
 DB_ECHO = True
 
 
