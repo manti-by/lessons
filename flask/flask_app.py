@@ -32,8 +32,10 @@ def user():
 
         return Response(new_user.json(), status=201, content_type="application/json")
 
-    data = map(str, app.current_session.query(User).all())
-    return Response("\n".join(data))
+    data = {"users": list(
+        map(lambda x: x.serialize(), app.current_session.query(User).all())
+    )}
+    return Response(json.dumps(data), content_type="application/json")
 
 
 if __name__ == "__main__":

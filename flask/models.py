@@ -20,11 +20,14 @@ class User(Base):
     def __str__(self):
         return f"{self.id},{self.email}"
 
-    def json(self):
-        return json.dumps({
+    def serialize(self):
+        return {
             "id": self.id,
             "email": self.email
-        })
+        }
+
+    def json(self):
+        return json.dumps(self.serialize())
 
 
 class Address(Base):
