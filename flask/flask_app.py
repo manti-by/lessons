@@ -12,25 +12,23 @@ logger = logging.getLogger(__name__)
 app = Flask(__name__)
 
 
-def dict_to_str(data: dict) -> str:
-    result = []
-    for key, value in data.items():
-        result.append(f"{key}: {value}")
-    return ", ".join(result)
-
-
 @app.route("/", methods=["GET"])
 def index():
-    return Response("Index page", status=400)
+    return Response("Index page")
 
 
 @app.route("/user/", methods=["GET", "POST"])
 def user():
     if request.method == "POST":
-        new_user = User(email=request.form.get("email"), password=request.form.get("password"))
+        data = request.json
+        if not data.get("email") or not data.get("password"):
+            return Response(status=400)
+
+        new_user = User(email=data.get("email"), password=data.get("password"))
         app.current_session.add(new_user)
         app.current_session.commit()
         return Response(str(new_user), status=201)
+
     data = map(str, app.current_session.query(User).all())
     return Response("\n".join(data))
 
