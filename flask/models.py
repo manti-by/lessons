@@ -1,3 +1,5 @@
+import json
+
 from sqlalchemy import Integer, String, Column, ForeignKey, Float
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
@@ -17,6 +19,12 @@ class User(Base):
 
     def __str__(self):
         return f"{self.id},{self.email}"
+
+    def json(self):
+        return json.dumps({
+            "id": self.id,
+            "email": self.email
+        })
 
 
 class Address(Base):

@@ -1,3 +1,4 @@
+import json
 import logging
 
 from flask import Flask, request, Response
@@ -14,7 +15,8 @@ app = Flask(__name__)
 
 @app.route("/", methods=["GET"])
 def index():
-    return Response("Index page")
+    data = {"message": "Index page"}
+    return Response(json.dumps(data), content_type="application/json")
 
 
 @app.route("/user/", methods=["GET", "POST"])
@@ -27,7 +29,8 @@ def user():
         new_user = User(email=data.get("email"), password=data.get("password"))
         app.current_session.add(new_user)
         app.current_session.commit()
-        return Response(str(new_user), status=201)
+
+        return Response(new_user.json(), status=201, content_type="application/json")
 
     data = map(str, app.current_session.query(User).all())
     return Response("\n".join(data))
