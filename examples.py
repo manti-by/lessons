@@ -22,7 +22,6 @@ def read_users(session: Session):  # вывод всех пользовател�
     for user in session.query(User).all():
         print(user.id, user.email, sep=" | ")
 
-
 def read_users(session: Session):
     """Вывод всех пользователей."""
     for user in session.query(User).all():
